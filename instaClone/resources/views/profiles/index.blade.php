@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
       <div class="col-3 p-5">
-        <img class="rounded-circle" src="https://instagram.frix7-1.fna.fbcdn.net/vp/11cedf826aaf9daf3623948cc028c2f9/5D655738/t51.2885-19/s150x150/22709172_932712323559405_7810049005848625152_n.jpg?_nc_ht=instagram.frix7-1.fna.fbcdn.net" alt="Profile logo">
+        <img class="w-100 rounded-circle" src="{{ $user->profile->profileImage() }}" alt="Profile logo">
       </div>
       <div class="col-9 pt-5">
         <div class="d-flex justify-content-between align-items-center">
@@ -39,7 +39,7 @@
       @foreach ($user->posts as $post)
         <div class="col-4 mb-4">
           <a href="/p/{{ $post->id }}">
-            <img class="w-100" src="/storage/{{ $post->image }}" alt="Post Image">
+            <img class="w-100" src="{{ $post->profileImage() }}" alt="Post Image">
           </a>
         </div>
       @endforeach
