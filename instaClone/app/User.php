@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Mail\NewUserWelcomeMail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -40,13 +42,12 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::created(
-            static::created(function ($user) {
-                $user->profile()->create([
-                    'title' => $user->username,
-                ]);
-            })
-        );
+        static::created(function ($user) {
+            $user->profile()->create([
+                'title' => $user->username,
+            ]);
+            Mail::to($user->email)->send(new NewUserWelcomeMail);
+        });
     }
 
     public function posts()
